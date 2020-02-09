@@ -10,7 +10,7 @@ public class GameModelTest {
 
     @BeforeClass
     public static void setUp() {
-        model = new GameModel();
+        model = new GameModel(0,100);
     }
 
     @Test
@@ -46,8 +46,9 @@ public class GameModelTest {
     @Test
     public void gameModelConstructor() {
         for (int i = 1000; i > 0; i--) {
-            model = new GameModel();
-            Assert.assertTrue(model.getRememberedValue() >= 0 && model.getRememberedValue() <= 100);
+            model = new GameModel(0,100);
+            Assert.assertTrue(model.getRememberedValue() >= model.getMIN_VALUE()
+                    && model.getRememberedValue() <= model.getMAX_VALUE());
         }
     }
 

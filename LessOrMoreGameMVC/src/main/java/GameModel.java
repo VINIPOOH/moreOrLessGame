@@ -4,13 +4,16 @@ import java.util.Random;
 public class GameModel {
 
 
-    private final int MIN_VALUE = 0;
-    private final int MAX_VALUE = 100;
+    private final int MIN_VALUE;
+    private final int MAX_VALUE;
     private int rememberedValue;
     private int amountTry = 0;
     private ArrayList<Integer> historyMoves = new ArrayList<>();
 
-
+    public GameModel(int MIN_VALUE, int MAX_VALUE) {
+        this.MIN_VALUE = MIN_VALUE;
+        this.MAX_VALUE = MAX_VALUE;
+    }
 
     public int getAmountTry() {
         return amountTry;
