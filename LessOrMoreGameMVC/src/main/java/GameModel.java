@@ -10,9 +10,7 @@ public class GameModel {
     private int amountTry = 0;
     private ArrayList<Integer> historyMoves = new ArrayList<>();
 
-    public GameModel() {
-        this.rememberedValue = new Random().nextInt(MAX_VALUE + 1);
-    }
+
 
     public int getAmountTry() {
         return amountTry;
@@ -30,8 +28,9 @@ public class GameModel {
         return rememberedValue;
     }
 
-    public void setRememberedValue(int rememberedValue) {
-        this.rememberedValue = rememberedValue;
+    public int setRememberedValue() {
+        this.rememberedValue = new Random().nextInt(MAX_VALUE + 1);
+        return rememberedValue;
     }
 
     public WinStatus isBiggerLessOrCorrect(int value) {

@@ -15,8 +15,10 @@ public class GameModelTest {
 
     @Test
     public void isBiggerLessOrCorrectBiggerValue() {
-        int valueWhichIsCorrectAnswer = 10;
-        model.setRememberedValue(valueWhichIsCorrectAnswer);
+        int valueWhichIsCorrectAnswer = model.setRememberedValue();
+        while (valueWhichIsCorrectAnswer==model.getMAX_VALUE()){
+            valueWhichIsCorrectAnswer = model.setRememberedValue();
+        }
         Assert.assertEquals(WinStatus.BIGGER_ANSWER,
                 model.isBiggerLessOrCorrect(valueWhichIsCorrectAnswer + 1));
 
@@ -24,8 +26,10 @@ public class GameModelTest {
 
     @Test
     public void isBiggerLessOrCorrectLessValue() {
-        int valueWhichIsCorrectAnswer = 10;
-        model.setRememberedValue(valueWhichIsCorrectAnswer);
+        int valueWhichIsCorrectAnswer = model.setRememberedValue();
+        while (valueWhichIsCorrectAnswer==model.getMIN_VALUE()){
+            valueWhichIsCorrectAnswer = model.setRememberedValue();
+        }
         Assert.assertEquals(WinStatus.LESS_ANSWER,
                 model.isBiggerLessOrCorrect(valueWhichIsCorrectAnswer - 1));
 
@@ -33,8 +37,7 @@ public class GameModelTest {
 
     @Test
     public void isBiggerLessOrCorrectEquals() {
-        int valueWhichIsCorrectAnswer = 10;
-        model.setRememberedValue(valueWhichIsCorrectAnswer);
+        int valueWhichIsCorrectAnswer = model.setRememberedValue();
         Assert.assertEquals(WinStatus.CORRECT_ANSWER,
                 model.isBiggerLessOrCorrect(valueWhichIsCorrectAnswer));
 
