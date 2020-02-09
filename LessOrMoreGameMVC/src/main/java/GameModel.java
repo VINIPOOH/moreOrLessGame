@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GameModel {
 
@@ -32,7 +32,7 @@ public class GameModel {
     }
 
     public int setRememberedValue() {
-        this.rememberedValue = new Random().nextInt(MAX_VALUE + 1);
+        this.rememberedValue = ThreadLocalRandom.current().nextInt(MIN_VALUE+1, MAX_VALUE);
         return rememberedValue;
     }
 

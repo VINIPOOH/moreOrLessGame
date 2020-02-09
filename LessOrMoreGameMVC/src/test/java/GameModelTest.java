@@ -1,8 +1,6 @@
-import org.junit.*;
-
-import java.lang.reflect.Field;
-
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class GameModelTest {
 
@@ -44,11 +42,13 @@ public class GameModelTest {
     }
 
     @Test
-    public void gameModelConstructor() {
-        for (int i = 1000; i > 0; i--) {
+    public void setRememberedValue() {
+        int randomResult;
+        for (int i = 10000; i > 0; i--) {
             model = new GameModel(0,100);
-            Assert.assertTrue(model.getRememberedValue() >= model.getMIN_VALUE()
-                    && model.getRememberedValue() <= model.getMAX_VALUE());
+            randomResult=model.setRememberedValue();
+            Assert.assertTrue(model.getRememberedValue() > model.getMIN_VALUE()
+                    && model.getRememberedValue() < model.getMAX_VALUE());
         }
     }
 
