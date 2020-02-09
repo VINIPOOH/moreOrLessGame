@@ -4,8 +4,16 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GameModel {
 
 
-    private final int MIN_VALUE;
-    private final int MAX_VALUE;
+    public void setMIN_VALUE(int MIN_VALUE) {
+        this.MIN_VALUE = MIN_VALUE;
+    }
+
+    public void setMAX_VALUE(int MAX_VALUE) {
+        this.MAX_VALUE = MAX_VALUE;
+    }
+
+    private int MIN_VALUE;
+    private int MAX_VALUE;
     private int rememberedValue;
     private int amountTry = 0;
     private ArrayList<Integer> historyMoves = new ArrayList<>();
@@ -41,9 +49,9 @@ public class GameModel {
         if (value == rememberedValue) {
             return WinStatus.CORRECT_ANSWER;//создать енам на ето
         } else if (rememberedValue < value) {
-            return WinStatus.BIGGER_ANSWER;
+            return WinStatus.ANSWER_IS_BIGGER;
         } else {
-            return WinStatus.LESS_ANSWER;
+            return WinStatus.ANSWER_IS_SMOLLER;
         }
     }
 }

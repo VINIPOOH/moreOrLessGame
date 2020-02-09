@@ -12,14 +12,12 @@ public class ConsoleController {
 
     private GameModel model;
     private ConsoleView view;
-    private int currentMinNumber;
-    private int currentMaxNumber;
 
     public ConsoleController(GameModel model, ConsoleView view) {
         this.model = model;
         this.view = view;
-        this.currentMinNumber = model.getMIN_VALUE();
-        this.currentMaxNumber = model.getMAX_VALUE();
+        model.setRememberedValue();
+
     }
 
     public void start() {
@@ -37,19 +35,19 @@ public class ConsoleController {
         int userInput;
         WinStatus winStatus = null;
 
-        showRangeForUserGuess(currentMinNumber, currentMaxNumber);
+        showRangeForUserGuess(model.getMIN_VALUE(), model.getMAX_VALUE());
         if (scanner.hasNext()) {
             try {
                 userInput = Integer.parseInt(scanner.nextLine());
-                if (userInput >= currentMinNumber && userInput <= currentMaxNumber) {
+                if (userInput > model.getMIN_VALUE() && userInput < model.getMAX_VALUE()) {
                     view.showMassage(YOUR_INPUT + userInput);
                     winStatus = model.isBiggerLessOrCorrect(userInput);
+//                    System.out.println("||||"+userInput+winStatus+model.getRememberedValue());
                     showMoveResult(winStatus);
                     changeRangeGuessing(userInput, winStatus);
-
                 } else {
                     view.showMassage(ANSWER_ON_INCORRECT_INPUT_MASSAGE);
-
+                    waitForNumber();
                 }
                 if (!winStatus.equals(WinStatus.CORRECT_ANSWER)) {
                     waitForNumber();
@@ -57,6 +55,7 @@ public class ConsoleController {
                 }
             } catch (Exception e) {
                 view.showMassage(ANSWER_ON_INCORRECT_INPUT_MASSAGE);
+                waitForNumber();
             }
 
         }
@@ -67,9 +66,9 @@ public class ConsoleController {
     }
 
     private void showMoveResult(WinStatus winStatus) {
-        if (winStatus.equals(WinStatus.LESS_ANSWER)) {
+        if (winStatus.equals(WinStatus.ANSWER_IS_SMOLLER)) {
             view.showMassage(INVITATION_TO_NEXT_MOVE_ASSUMPTION_MORE);
-        } else if (winStatus.equals(WinStatus.BIGGER_ANSWER)) {
+        } else if (winStatus.equals(WinStatus.ANSWER_IS_BIGGER)) {
             view.showMassage(INVITATION_TO_NEXT_MOVE_ASSUMPTION_LESS);
         } else {
             showGameResult();
@@ -77,13 +76,13 @@ public class ConsoleController {
     }
 
     private void changeRangeGuessing(int userChoose, WinStatus winStatus) {
-        if (winStatus.equals(WinStatus.LESS_ANSWER)) {
-            currentMinNumber = userChoose;
-        } else if (winStatus.equals(WinStatus.BIGGER_ANSWER)) {
-            currentMaxNumber = userChoose;
+        if (winStatus.equals(WinStatus.ANSWER_IS_SMOLLER)) {
+            model.setMIN_VALUE(userChoose);
+        } else if (winStatus.equals(WinStatus.ANSWER_IS_BIGGER)) {
+            model.setMAX_VALUE(userChoose);
         } else {
-            currentMinNumber = userChoose;
-            currentMaxNumber = userChoose;
+            model.setMIN_VALUE(userChoose-1);
+            model.setMAX_VALUE(userChoose+1);
         }
     }
 

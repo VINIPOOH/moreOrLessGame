@@ -1,5 +1,5 @@
 public enum WinStatus {
     CORRECT_ANSWER,
-    LESS_ANSWER,
-    BIGGER_ANSWER
+    ANSWER_IS_SMOLLER,
+    ANSWER_IS_BIGGER
 }
