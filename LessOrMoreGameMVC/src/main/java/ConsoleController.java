@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-public class ConsoleController {
+class ConsoleController {
     private final String INVITATION_MASSAGE = "Try to guess a number";
-    private final String RANGE_INFO = "Now number in range" +"not including range limits ";
+    private final String RANGE_INFO = "Now number in range" + "not including range limits ";
     private final String ANSWER_ON_INCORRECT_INPUT_MASSAGE = "Your input is incorrect, try again";
     private final String INVITATION_TO_NEXT_MOVE_ASSUMPTION_MORE = "conceived number more than your offer";
     private final String INVITATION_TO_NEXT_MOVE_ASSUMPTION_LESS = "conceived number less than your offer";
@@ -10,8 +10,8 @@ public class ConsoleController {
     private final String WIN_MASSAGE = "Congratulations you are correct";
     private final String WIN_AMOUNT_MOVES = "amount of your moves is";
 
-    private GameModel model;
-    private ConsoleView view;
+    private final GameModel model;
+    private final ConsoleView view;
 
     public ConsoleController(GameModel model, ConsoleView view) {
         this.model = model;
@@ -33,7 +33,7 @@ public class ConsoleController {
     private void waitForNumber() {
         Scanner scanner = new Scanner(System.in);
         int userInput;
-        WinStatus winStatus = null;
+        WinStatus winStatus;
 
         showRangeForUserGuess(model.getMIN_VALUE(), model.getMAX_VALUE());
         if (scanner.hasNext()) {
@@ -52,7 +52,6 @@ public class ConsoleController {
                 }
                 if (!winStatus.equals(WinStatus.CORRECT_ANSWER)) {
                     waitForNumber();
-                    return;
                 }
             } catch (Exception e) {
                 view.showMassage(ANSWER_ON_INCORRECT_INPUT_MASSAGE);
@@ -67,7 +66,7 @@ public class ConsoleController {
     }
 
     private void showMoveResult(WinStatus winStatus) {
-        if (winStatus.equals(WinStatus.ANSWER_IS_SMOLLER)) {
+        if (winStatus.equals(WinStatus.ANSWER_IS_SMALLER)) {
             view.showMassage(INVITATION_TO_NEXT_MOVE_ASSUMPTION_MORE);
         } else if (winStatus.equals(WinStatus.ANSWER_IS_BIGGER)) {
             view.showMassage(INVITATION_TO_NEXT_MOVE_ASSUMPTION_LESS);
@@ -77,13 +76,13 @@ public class ConsoleController {
     }
 
     private void changeRangeGuessing(int userChoose, WinStatus winStatus) {
-        if (winStatus.equals(WinStatus.ANSWER_IS_SMOLLER)) {
+        if (winStatus.equals(WinStatus.ANSWER_IS_SMALLER)) {
             model.setMIN_VALUE(userChoose);
         } else if (winStatus.equals(WinStatus.ANSWER_IS_BIGGER)) {
             model.setMAX_VALUE(userChoose);
         } else {
-            model.setMIN_VALUE(userChoose-1);
-            model.setMAX_VALUE(userChoose+1);
+            model.setMIN_VALUE(userChoose - 1);
+            model.setMAX_VALUE(userChoose + 1);
         }
     }
 

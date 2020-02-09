@@ -28,7 +28,7 @@ public class GameModelTest {
         while (valueWhichIsCorrectAnswer==model.getMIN_VALUE()){
             valueWhichIsCorrectAnswer = model.setRememberedValue();
         }
-        Assert.assertEquals(WinStatus.ANSWER_IS_SMOLLER,
+        Assert.assertEquals(WinStatus.ANSWER_IS_SMALLER,
                 model.isBiggerLessOrCorrect(valueWhichIsCorrectAnswer - 1));
 
     }
