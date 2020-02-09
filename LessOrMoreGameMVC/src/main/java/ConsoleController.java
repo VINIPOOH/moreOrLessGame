@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class ConsoleController {
     private final String INVITATION_MASSAGE = "Try to guess a number";
-    private final String RANGE_INFO = "Now number in range ";
+    private final String RANGE_INFO = "Now number in range" +"not including range limits ";
     private final String ANSWER_ON_INCORRECT_INPUT_MASSAGE = "Your input is incorrect, try again";
     private final String INVITATION_TO_NEXT_MOVE_ASSUMPTION_MORE = "conceived number more than your offer";
     private final String INVITATION_TO_NEXT_MOVE_ASSUMPTION_LESS = "conceived number less than your offer";
