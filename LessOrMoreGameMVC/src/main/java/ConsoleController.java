@@ -48,6 +48,7 @@ public class ConsoleController {
                 } else {
                     view.showMassage(ANSWER_ON_INCORRECT_INPUT_MASSAGE);
                     waitForNumber();
+                    return;
                 }
                 if (!winStatus.equals(WinStatus.CORRECT_ANSWER)) {
                     waitForNumber();
